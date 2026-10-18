@@ -1,13 +1,12 @@
 package main
 
 type Node struct {
-	Char     rune
 	IsEnd    bool
 	Children [26]*Node
 }
 
-func NewNode(c rune) *Node {
-	return &Node{Char: c}
+func NewNode() *Node {
+	return &Node{}
 }
 
 type Trie struct {
@@ -15,16 +14,15 @@ type Trie struct {
 }
 
 func NewTrie() *Trie {
-	return &Trie{Root: NewNode(' ')}
+	return &Trie{Root: NewNode()}
 }
-
 
 func (t *Trie) Add(w string) {
 	var root *Node = t.Root
 	for _, char := range w {
 		idx := char - 'a'
 		if root.Children[idx] == nil {
-			root.Children[idx] = NewNode(char)
+			root.Children[idx] = NewNode()
 		}
 		root = root.Children[idx]
 	}
