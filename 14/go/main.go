@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"strings"
 )
 
@@ -13,25 +14,19 @@ func NewNode() *Node {
 	return &Node{}
 }
 
-func (n *Node) ChildrenCount() int {
+func (n *Node) HasOne() (bool, int) {
 	var count int
-	for _, v := range n.Children {
-		if v != nil {
-			count++
-		}
-	}
-
-	return count
-}
-
-func (n *Node) UniqueNext() int {
+	var lastSeen int = -1
 	for i, v := range n.Children {
 		if v != nil {
-			return i
+			count++
+			lastSeen = i
 		}
 	}
-	return -1
+
+	return count == 1, lastSeen
 }
+
 
 type Trie struct {
 	Root *Node
@@ -56,10 +51,12 @@ func (t *Trie) Add(w string) {
 func (t *Trie) LCP() string {
 	var prefix strings.Builder
 	root := t.Root
-	for root.ChildrenCount() == 1 && !root.IsWord {
-		idx := root.UniqueNext()
+	hasOne, idx := root.HasOne()
+
+	for hasOne && !root.IsWord {
 		prefix.WriteString(string(rune(idx + 'a')))
 		root = root.Children[idx]
+		hasOne, idx = root.HasOne()
 	}
 
 	return prefix.String()
@@ -71,4 +68,9 @@ func longestCommonPrefix(strs []string) string {
 		t.Add(w)
 	}
     return t.LCP()
+}
+
+func main() {
+	var wrds = []string{"flower", "flowershop", }
+	fmt.Println(longestCommonPrefix(wrds))
 }
