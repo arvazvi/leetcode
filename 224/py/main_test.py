@@ -1,10 +1,10 @@
 import unittest
 
-from main import RPN, shunting_yard, tokenize
+from main import Solution
 
 
 def evaluate(expression: str) -> int:
-    return RPN(shunting_yard(expression))
+    return Solution().calculate(expression)
 
 
 class TestBasicCalculator(unittest.TestCase):
@@ -50,23 +50,17 @@ class TestBasicCalculator(unittest.TestCase):
     def test_complex(self) -> None:
         self.assertEqual(evaluate("((10 - 5) + (2 + 3))"), 10)
 
-    def test_tokenize_basic(self) -> None:
-        self.assertEqual(tokenize("1+2"), ["1", "+", "2"])
+    def test_leading_unary_in_parens(self) -> None:
+        self.assertEqual(evaluate("-(2+3)"), -5)
 
-    def test_tokenize_unary(self) -> None:
-        self.assertEqual(tokenize("-3+2"), ["u-", "3", "+", "2"])
+    def test_unary_after_open_paren(self) -> None:
+        self.assertEqual(evaluate("2+(-3)"), -1)
 
-    def test_tokenize_multidigit(self) -> None:
-        self.assertEqual(tokenize("  42  + 7  "), ["42", "+", "7"])
+    def test_double_unary_in_parens(self) -> None:
+        self.assertEqual(evaluate("2-(-(-3))"), -1)
 
-    def test_tokenize_parens(self) -> None:
-        self.assertEqual(tokenize("(1+2)"), ["(", "1", "+", "2", ")"])
-
-    def test_shunting_yard_basic(self) -> None:
-        self.assertEqual(shunting_yard("1+2"), ["1", "2", "+"])
-
-    def test_shunting_yard_unary(self) -> None:
-        self.assertEqual(shunting_yard("-5"), ["5", "u-"])
+    def test_large_expression(self) -> None:
+        self.assertEqual(evaluate("(1+(4+5+2)-3)+(6+8)"), 23)
 
 
 if __name__ == "__main__":
