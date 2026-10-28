@@ -1,12 +1,12 @@
 class TreeNode:
-    def __init__(self, val, left = None, right = None):
+    def __init__(self, val: int, left: TreeNode | None = None, right: TreeNode | None = None) -> None:
         self.val = val
         self.left = left
         self.right = right
 
 class Solution:
     def isSymmetric(self, root: TreeNode | None) -> bool:
-        def mirror(a, b):
+        def mirror(a: TreeNode | None, b: TreeNode | None) -> bool:
             if a and b:
                 return mirror(a.left, b.right) and mirror(b.left, a.right) and a.val == b.val
             elif not a and not b:

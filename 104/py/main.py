@@ -1,10 +1,8 @@
-from typing import Optional
-
 class TreeNode:
-    def __init__(self, val: int = 0, left: Optional['TreeNode'] = None, right: Optional['TreeNode'] = None) -> None:
+    def __init__(self, val: int = 0, left: TreeNode | None = None, right: TreeNode | None = None) -> None:
         self.val: int = val
-        self.left: Optional['TreeNode'] = left
-        self.right: Optional['TreeNode'] = right
+        self.left: TreeNode | None = left
+        self.right: TreeNode | None = right
 
 class Solution:
     def maxDepth(self, root: TreeNode | None) -> int:

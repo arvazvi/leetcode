@@ -1,10 +1,8 @@
-from typing import List
-
 class Solution:
     def calculate(self, s: str) -> int:
-        def tokenize(expression: str) -> List[str]:
+        def tokenize(expression: str) -> list[str]:
             expression = expression.replace(" ", "")
-            tokens = []
+            tokens: list[str] = []
             i = 0
             n = len(expression)
 
@@ -27,9 +25,9 @@ class Solution:
             return tokens
 
 
-        def shunting_yard(tokens: List[str]) -> List[str]:
-            output = []
-            operators = []
+        def shunting_yard(tokens: list[str]) -> list[str]:
+            output: list[str] = []
+            operators: list[str] = []
 
             for token in tokens:
                 if token.isdigit():
@@ -52,8 +50,8 @@ class Solution:
                 output.append(operators.pop())
             return output
 
-        def rpn(tokens: List[str]):
-            stack = []
+        def rpn(tokens: list[str]) -> int | None:
+            stack: list[int] = []
             for token in tokens:
                 if token == "u-":
                     stack.append(-stack.pop())

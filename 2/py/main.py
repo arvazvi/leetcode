@@ -1,9 +1,9 @@
 class ListNode:
-    def __init__(self, val=0, next=None):
+    def __init__(self, val: int = 0, next: ListNode | None = None) -> None:
         self.val = val
         self.next = next
 
-def sum_lists(l1: ListNode, l2: ListNode, carry=0) -> ListNode:
+def sum_lists(l1: ListNode | None, l2: ListNode | None, carry: int = 0) -> ListNode | None:
     if not l1 and not l2 and carry == 0:
         return None
 
@@ -20,4 +20,3 @@ def sum_lists(l1: ListNode, l2: ListNode, carry=0) -> ListNode:
 
     result.next = sum_lists(next_l1, next_l2, new_carry)
     return result
-

@@ -1,11 +1,9 @@
-from typing import Dict, List, Set, Tuple
-
 class Trie:
-    def __init__(self):
+    def __init__(self) -> None:
         self.is_word: bool = False
-        self.children: Dict[int, 'Trie'] = {}
+        self.children: dict[int, Trie] = {}
 
-    def add(self, word: str):
+    def add(self, word: str) -> None:
         root = self
         for char in word:
             idx = ord(char) - ord('a')
@@ -14,10 +12,10 @@ class Trie:
             root = root.children[idx]
         root.is_word = True
 
-    def search_char(self, char: str) -> 'Trie':
+    def search_char(self, char: str) -> Trie | None:
         return self.children.get(ord(char) - ord('a'))
 
-def dfs(x: int, y: int, board: List[List[str]], root: Trie, seen: Set[Tuple[int, int]], ans: List[str], path: List[str]):
+def dfs(x: int, y: int, board: list[list[str]], root: Trie, seen: set[tuple[int, int]], ans: list[str], path: list[str]) -> None:
     rows = len(board)
     cols = len(board[0])
 
@@ -60,7 +58,7 @@ class Solution:
         for word in words:
             trie.add(word)
             
-        ans: List[str] = []
+        ans: list[str] = []
         for i in range(rows):
             for j in range(cols):
                 dfs(i, j, board, trie, set(), ans, [])

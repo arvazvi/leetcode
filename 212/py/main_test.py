@@ -162,7 +162,7 @@ class TestWordSearchII(unittest.TestCase):
         rows, cols = len(board), len(board[0])
 
         def word_exists(word: str) -> bool:
-            def dfs(i: int, j: int, k: int, seen: set) -> bool:
+            def dfs(i: int, j: int, k: int, seen: set[tuple[int, int]]) -> bool:
                 if k == len(word):
                     return True
                 if i < 0 or i >= rows or j < 0 or j >= cols:

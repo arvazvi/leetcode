@@ -1,6 +1,6 @@
 class Solution:
     def evalRPN(self, tokens: list[str]) -> int:
-        stack = []
+        stack: list[int] = []
         for token in tokens:
             if token in "+-*/":
                 x, y = stack.pop(), stack.pop()

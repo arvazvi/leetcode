@@ -1,5 +1,5 @@
 class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
+    def __init__(self, val: int = 0, left: TreeNode | None = None, right: TreeNode | None = None) -> None:
         self.val = val
         self.left = left
         self.right = right
@@ -11,7 +11,7 @@ class Solution:
 
         L, R = 0, len(nums) - 1
 
-        def process(L, R):
+        def process(L: int, R: int) -> TreeNode | None:
             if L > R:
                 return None
 

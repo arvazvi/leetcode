@@ -1,6 +1,4 @@
-from typing import List
-
-def minSubArrayLen(target: int, nums: List[int]) -> int:
+def minSubArrayLen(target: int, nums: list[int]) -> int:
     if not nums or sum(nums) < target:
         return 0
 

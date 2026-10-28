@@ -1,16 +1,14 @@
-from typing import Optional
-
 class TreeNode:
-    def __init__(self, val: int = 0, left: Optional['TreeNode'] = None, right: Optional['TreeNode'] = None) -> None:
+    def __init__(self, val: int = 0, left: TreeNode | None = None, right: TreeNode | None = None) -> None:
         self.val: int = val
-        self.left: Optional['TreeNode'] = left
-        self.right: Optional['TreeNode'] = right
+        self.left: TreeNode | None = left
+        self.right: TreeNode | None = right
 
 class Solution:
     def flatten(self, root: TreeNode | None) -> None:
-        stack = []
+        stack: list[TreeNode] = []
 
-        def dfs(root):
+        def dfs(root: TreeNode | None) -> None:
             if root:
                 stack.append(root)
                 if root.left:

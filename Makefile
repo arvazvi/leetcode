@@ -11,8 +11,8 @@ go-%:
 
 py-%:
 	@test -d $*/py || { echo "No existe $*/py/"; exit 1; }
-	cd $*/py && python3.12 -m unittest discover -p '*_test.py' -v
+	cd $*/py && python3.14 -m unittest discover -p '*_test.py' -v
 
 test-all:
 	@for d in */go/; do test -f $$d/go.mod || { echo "skip $$d (sin go.mod)"; continue; }; (cd $$d && go test ./...) || exit 1; done
-	@for d in */py/; do (cd $$d && python3.12 -m unittest discover -p '*_test.py') || exit 1; done
+	@for d in */py/; do (cd $$d && python3.14 -m unittest discover -p '*_test.py') || exit 1; done
